@@ -1,0 +1,23 @@
+version: '2'
+services:
+
+  #################################################################
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+
+  #################################################################
+
+  ow_bot:
+    container_name: ow_bot
+    image: discord/ow_bot
+    build:
+      context: .
+      dockerfile: Dockerfile-ow_discord_leaderboard
+    env_file:
+      - "./.env"
+    ports:
+      - "3009:3009"
