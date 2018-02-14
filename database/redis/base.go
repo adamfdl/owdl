@@ -1,7 +1,7 @@
 package redis
 
 import (
-	"github.com/adamfdl/ow_discord_leaderboard/database"
+	"github.com/adamfdl/owly/database"
 	"github.com/go-redis/redis"
 )
 

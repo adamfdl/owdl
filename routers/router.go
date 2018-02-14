@@ -1,7 +1,7 @@
 package routers
 
 import (
-	"github.com/adamfdl/ow_discord_leaderboard/controller"
+	"github.com/adamfdl/owly/controller"
 	"github.com/gorilla/mux"
 )
 

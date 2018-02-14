@@ -5,8 +5,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/adamfdl/ow_discord_leaderboard/database/redis"
-	"github.com/adamfdl/ow_discord_leaderboard/provider"
+	"github.com/adamfdl/owly/database/redis"
+	"github.com/adamfdl/owly/provider"
 	"github.com/rs/zerolog/log"
 )
 

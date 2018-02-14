@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/adamfdl/ow_discord_leaderboard/routers"
-	"github.com/adamfdl/ow_discord_leaderboard/task"
+	"github.com/adamfdl/owly/routers"
+	"github.com/adamfdl/owly/task"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -15,7 +15,6 @@ func init() {
 }
 
 func main() {
-
 	task.FetchOverwatchAPIJob()
 
 	http.ListenAndServe(":3009", routers.Init())

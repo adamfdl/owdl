@@ -11,12 +11,12 @@ services:
 
   #################################################################
 
-  ow_bot:
-    container_name: ow_bot
-    image: discord/ow_bot
+  owly:
+    container_name: owly
+    image: discord-bot/owly
     build:
       context: .
-      dockerfile: Dockerfile-ow_discord_leaderboard
+      dockerfile: Dockerfile-owly
     env_file:
       - "./.env"
     ports:

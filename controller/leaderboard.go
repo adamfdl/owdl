@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/adamfdl/ow_discord_leaderboard/database/redis"
+	"github.com/adamfdl/owly/database/redis"
 	"github.com/rs/zerolog/log"
 )
 
