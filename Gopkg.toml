@@ -44,3 +44,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/jasonlvhit/gocron"
+
+[[constraint]]
+  name = "github.com/bwmarrin/discordgo"
+  version = "0.18.0"

@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/bwmarrin/discordgo"
+  packages = ["."]
+  revision = "4a33b9bc7c56cfdb9bb244e33e83cb3941fe2bdc"
+  version = "v0.18.0"
+
+[[projects]]
   name = "github.com/go-redis/redis"
   packages = [".","internal","internal/consistenthash","internal/hashtag","internal/pool","internal/proto"]
   revision = "8b4fa6d443e35ca8b1c37be877285252430b06a3"
@@ -20,14 +26,26 @@
   version = "v1.6.1"
 
 [[projects]]
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "ea4d1f681babbce9545c9c5f3d5194a789c89f5b"
+  version = "v1.2.0"
+
+[[projects]]
   name = "github.com/rs/zerolog"
   packages = [".","internal/json","log"]
   revision = "b53826c57a6a1d8833443ebeacf1cfb62b229c64"
   version = "v1.4.0"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/crypto"
+  packages = ["nacl/secretbox","poly1305","salsa20/salsa"]
+  revision = "650f4a345ab4e5b245a3034b110ebc7299e68186"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ea1b9928322e18f3ce06a88ea28107cf00d9ea173b708eae1cb6bb1e89075383"
+  inputs-digest = "dfd5c312491e7fb0b75608c842c44c4ad5ebdd02778b0c79b3d646af6605ac80"
   solver-name = "gps-cdcl"
   solver-version = 1

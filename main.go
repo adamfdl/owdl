@@ -1,11 +1,13 @@
 package main
 
 import (
-	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 
-	"github.com/adamfdl/owly/routers"
+	"github.com/adamfdl/owly/controller"
 	"github.com/adamfdl/owly/task"
+	"github.com/bwmarrin/discordgo"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 )
@@ -15,7 +17,33 @@ func init() {
 }
 
 func main() {
+	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
+	if err != nil {
+		log.Error().
+			Msgf("Failed creating discord session. Error: %s", err.Error())
+		return
+	}
+	startDiscord(dg)
+
 	task.FetchOverwatchAPIJob()
 
-	http.ListenAndServe(":3009", routers.Init())
+	sc := make(chan os.Signal, 1)
+	signal.Notify(sc, syscall.SIGINT, syscall.SIGTERM, os.Interrupt, os.Kill)
+	<-sc
+
+	dg.Close()
+}
+
+func startDiscord(dg *discordgo.Session) {
+	err := dg.Open()
+	if err != nil {
+		log.Error().
+			Msgf("Failed to opn connection. Error: %s ", err.Error())
+		return
+	}
+
+	log.Info().
+		Msg("Success. OWDL bot is now running. Ctrl-C to exit.")
+
+	dg.AddHandler(controller.OWDiscordLeaderboard)
 }
