@@ -2,6 +2,8 @@ package task
 
 import (
 	"fmt"
+	"os"
+	"strconv"
 	"sync"
 	"time"
 
@@ -43,6 +45,12 @@ func asyncOverwatchAPIRequest() {
 		"ADAMMS-1274",
 		"Awkstronaut-1974",
 		"Yoshinoya-11403",
+		"BigTummy13-1379",
+		"Alphacuremom-11921",
+		"flyingpan-11823",
+		"HighCadence-11889",
+		"Rinmix-1426",
+		"SkepticFrog-1100",
 	}
 
 	var wg sync.WaitGroup
@@ -63,7 +71,8 @@ func asyncOverwatchAPIRequest() {
 }
 
 func FetchOverwatchAPIJob() {
-	ticker := time.NewTicker(15 * time.Second)
+	interval, _ := strconv.Atoi(os.Getenv("JOB_INTERVAL"))
+	ticker := time.NewTicker(time.Duration(interval) * time.Second)
 	go func() {
 		for {
 			select {

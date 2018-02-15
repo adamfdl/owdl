@@ -1,55 +1,36 @@
 package controller
 
 import (
-	"encoding/json"
-	"net/http"
-	"strings"
+	"fmt"
 
 	"github.com/adamfdl/owly/database/redis"
-	"github.com/rs/zerolog/log"
+	"github.com/bwmarrin/discordgo"
 )
 
-type Data struct {
-	Payload interface{} `json:"data"`
-}
-
-type PlayerInfo struct {
-	LocalRank       int    `json:"local_rank"`
-	Battletag       string `json:"battletag"`
-	CompetitiveRank int    `json:"competitive_rank"`
-}
-
-func Leaderboard(w http.ResponseWriter, r *http.Request) {
-
-	log.Info().Str("method", "leaderboard").Msg("Endpoint /leaderboard hit")
-
-	result, err := redis.GetOWLeaderboardOperator().RetrieveLeaderboard()
-	if err != nil {
-		log.Error().
-			Str("method", "retrieve_leaderboard_redis").
-			Msgf("Failed retrieving leaderboard from redis. Error: %s", err.Error())
+func OWDiscordLeaderboard(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if m.Author.ID == s.State.User.ID {
 		return
 	}
 
-	var playerInfos []PlayerInfo
-	for i := range result {
-		var playerInfo PlayerInfo
-		playerInfo.Battletag = strings.Replace(result[i].Member.(string), "-", "#", 1)
-		playerInfo.CompetitiveRank = int(result[i].Score)
-		playerInfo.LocalRank = i + 1
+	if m.Content == "!owdl standings" {
+		var reply string
+		if result, err := redis.GetOWLeaderboardOperator().RetrieveLeaderboard(); err != nil {
+			reply = ":shit: Technical difficulties :shit:"
+			s.ChannelMessageSend(m.ChannelID, reply)
+		} else {
+			if len(result) <= 0 {
+				reply = ":shit: There's no player to retrieve in the database :shit:"
+				s.ChannelMessageSend(m.ChannelID, reply)
+				return
+			}
 
-		log.Debug().
-			Int("index", i).
-			Float64("rank", result[i].Score).
-			Str("battletag", result[i].Member.(string)).
-			Msg("Player retrieved from redis")
+			var formattedReply string
+			for i := 0; i < len(result); i++ {
+				player := fmt.Sprintf("[%d]\t> %s\n\t\t\tSR: %d\n", i+1, result[i].Member.(string), int(result[i].Score))
+				formattedReply += player
+			}
 
-		playerInfos = append(playerInfos, playerInfo)
+			s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("```%s```", formattedReply))
+		}
 	}
-
-	log.Info().Str("method", "leaderboard").Msg("Endpoint /leaderboard finished without errors")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(&Data{Payload: playerInfos})
 }
