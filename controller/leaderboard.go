@@ -24,13 +24,16 @@ func OWDiscordLeaderboard(s *discordgo.Session, m *discordgo.MessageCreate) {
 				return
 			}
 
-			var formattedReply string
+			var leaderboard string
 			for i := 0; i < len(result); i++ {
 				player := fmt.Sprintf("[%d]\t> %s\n\t\t\tSR: %d\n", i+1, result[i].Member.(string), int(result[i].Score))
-				formattedReply += player
+				if i == 3 {
+					leaderboard += separator
+				}
+				leaderboard += player
 			}
 
-			s.ChannelMessageSend(m.ChannelID, fmt.Sprintf("```%s```", formattedReply))
+			s.ChannelMessageSend(m.ChannelID, buildLeaderboardMessage(leaderboard))
 		}
 	}
 }
