@@ -3,7 +3,7 @@ package controller
 import (
 	"fmt"
 
-	"github.com/adamfdl/owly/database/redis"
+	"github.com/adamfdl/owdl/database/redis"
 	"github.com/bwmarrin/discordgo"
 )
 

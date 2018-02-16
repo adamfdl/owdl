@@ -5,8 +5,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/adamfdl/owly/controller"
-	"github.com/adamfdl/owly/task"
+	"github.com/adamfdl/owdl/controller"
+	"github.com/adamfdl/owdl/task"
 	"github.com/bwmarrin/discordgo"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"

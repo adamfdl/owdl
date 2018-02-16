@@ -7,8 +7,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/adamfdl/owly/database/redis"
-	"github.com/adamfdl/owly/provider"
+	"github.com/adamfdl/owdl/database/redis"
+	"github.com/adamfdl/owdl/provider"
 	"github.com/rs/zerolog/log"
 )
 

@@ -1,8 +1,8 @@
 FROM golang:alpine
 
-ENV APP_HOME $GOPATH/src/github.com/adamfdl/owly
+ENV APP_HOME $GOPATH/src/github.com/adamfdl/owdl
 WORKDIR $APP_HOME
 
 COPY ./ $APP_HOME
 RUN go build
-CMD [ "./owly" ]
+CMD [ "./owdl" ]
