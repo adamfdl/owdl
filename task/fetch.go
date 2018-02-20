@@ -26,14 +26,6 @@ func makeRequest(battletag string, wg *sync.WaitGroup) {
 	}
 
 	redis.GetOWLeaderboardOperator().ZAdd(battletag, result.Competitive.Rank)
-
-	log.Debug().
-		Str("method", "get_profile_ow_api").
-		Int("comp_rank", result.Competitive.Rank).
-		Int("comp_win", result.Games.Competitive.Won).
-		Int("comp_lost", result.Games.Competitive.Lost).
-		Str("username", result.Username).
-		Msgf("Fetched username: %s", result.Username)
 }
 
 func asyncOverwatchAPIRequest() {

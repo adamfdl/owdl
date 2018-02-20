@@ -31,9 +31,15 @@
   packages = ["nacl/secretbox","poly1305","salsa20/salsa"]
   revision = "650f4a345ab4e5b245a3034b110ebc7299e68186"
 
+[[projects]]
+  name = "gopkg.in/natefinch/lumberjack.v2"
+  packages = ["."]
+  revision = "a96e63847dc3c67d17befa69c303767e2f84e54f"
+  version = "v2.1"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "3645e16a2d7dd6f50c3086dc27ce3bbcdca82c6cd36bfba05513d915d40b5e28"
+  inputs-digest = "1088b5ff9340816e6f58c692f6b50d7530e914f40460d90b404eebc692dc9b93"
   solver-name = "gps-cdcl"
   solver-version = 1

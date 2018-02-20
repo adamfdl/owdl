@@ -10,10 +10,22 @@ import (
 	"github.com/bwmarrin/discordgo"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
+	lumberjack "gopkg.in/natefinch/lumberjack.v2"
 )
 
 func init() {
-	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	writer := &lumberjack.Logger{
+		Filename:   "./logs/app.log",
+		MaxSize:    100, // megabytes
+		MaxBackups: 3,
+		MaxAge:     28, //days
+		Compress:   false,
+	}
+
+	log.Logger = log.Output(writer)
+	if os.Getenv("IS_DEV") == "true" {
+		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
+	}
 }
 
 func main() {
