@@ -29,7 +29,7 @@ func init() {
 }
 
 func main() {
-	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
+	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN_DEV"))
 	if err != nil {
 		log.Error().
 			Msgf("Failed creating discord session. Error: %s", err.Error())
