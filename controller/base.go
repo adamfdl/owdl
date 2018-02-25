@@ -14,13 +14,16 @@ func buildLeaderboardMessage(leaderboard string) string {
 }
 
 func seasonEnds() string {
-	seasonEnds, err := time.Parse("1/2/06", os.Getenv("SEASON_ENDS"))
+	seasonEnds, err := time.Parse("1/02/06 15:04PM", os.Getenv("SEASON_ENDS"))
 	if err != nil {
 		fmt.Println(err.Error())
 	}
 	remainingHours := int(time.Until(seasonEnds).Hours())
 
 	if remainingHours <= 24 {
+		if remainingHours <= 0 {
+			return fmt.Sprintf("Season 8 has ended! Kalian semua sampah! Uninstall saja kalian!")
+		}
 		return fmt.Sprintf("Season ends in %d hours!", remainingHours)
 	}
 
