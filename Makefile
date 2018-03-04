@@ -9,4 +9,6 @@ attach:
 
 clean:
 	-docker rm ow_bot
-	@docker rmi -f discord/ow_bot
+	-docker-compose down
+	-docker-compose rm -f
+	-docker rmi -f ow_bot

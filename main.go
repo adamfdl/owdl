@@ -23,13 +23,11 @@ func init() {
 	}
 
 	log.Logger = log.Output(writer)
-	if os.Getenv("IS_DEV") == "true" {
-		log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
-	}
+	log.Logger = log.Output(zerolog.ConsoleWriter{Out: os.Stderr})
 }
 
 func main() {
-	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
+	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN_DEV"))
 	if err != nil {
 		log.Error().
 			Msgf("Failed creating discord session. Error: %s", err.Error())
